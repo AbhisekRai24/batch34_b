@@ -1,45 +1,59 @@
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class SimpleInterest extends StatefulWidget {
+  const SimpleInterest({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<SimpleInterest> createState() => _SimpleInterestState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _SimpleInterestState extends State<SimpleInterest> {
+  int p = 0;
+  int t = 0;
+  int r = 0;
+
+  double result = 0;
+
+  void calculateSI(int p, int t, int r) {
+    setState(() {
+      result = p * t * r / 100;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          children: [
-            SizedBox(height: 35), 
-            Text("DashBoard"),
-          ],
-        ),
+        title: Text("Simple Interest Calculator"),
+        backgroundColor: const Color.fromARGB(255, 117, 100, 50),
         centerTitle: true,
-        backgroundColor: Colors.purple,
-        elevation: 0,
       ),
-      body: ListView(
+      body: Column(
         children: [
-          ListTile(
-            title: Text("Add Two Numbers"),
-            onTap: () => Navigator.pushNamed(context, '/add'),
+          TextField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: "Enter the Principal Amount",
+            ),
+            onChanged: (value) => {p = int.parse(value)},
           ),
-          ListTile(
-            title: Text("Area of Circle"),
-            onTap: () => Navigator.pushNamed(context, '/circle'),
+          TextField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: "Enter the Time In Years"),
+            onChanged: (value) => {t = int.parse(value)},
           ),
-          ListTile(
-            title: Text("Simple Interest"),
-            onTap: () => Navigator.pushNamed(context, '/interest'),
+          TextField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: "Enter the Rate"),
+            onChanged: (value) => {r = int.parse(value)},
           ),
-          ListTile(
-            title: Text("Palindrome Number"),
-            onTap: () => Navigator.pushNamed(context, '/palindrome'),
+          ElevatedButton(
+            onPressed: () {
+              calculateSI(p, t, r);
+            },
+            child: Text("Calculate SI"),
           ),
+          Text("SI = $result"),
         ],
       ),
     );

@@ -11,21 +11,26 @@ class _FirstViewState extends State<FirstView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("App bar"),
-        centerTitle: true,
-        backgroundColor: Colors.red,
-        elevation: 0,
-      ),
-      body: Column(
+      appBar: AppBar(title: const Text("Dashboard")),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
         children: [
-          TextField(),
-          TextField(),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(onPressed: () {}, child: Text("Add")),
+          ElevatedButton(
+            onPressed: () => Navigator.pushNamed(context, '/add'),
+            child: const Text("Add Two Numbers"),
           ),
-          Text("Result : 0"),
+          ElevatedButton(
+            onPressed: () => Navigator.pushNamed(context, '/circle'),
+            child: const Text("Area of Circle"),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pushNamed(context, '/interest'),
+            child: const Text("Simple Interest"),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pushNamed(context, '/palindrome'),
+            child: const Text("Palindrome Number"),
+          ),
         ],
       ),
     );
